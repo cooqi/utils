@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>编辑IP/端口</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,user-scalable=no, minimum-scale=1, initial-scale=1" />
+    <link rel="stylesheet" href="../../../css/font.css">
+    <link rel="stylesheet" href="../../../css/xadmin.css">
+    <script type="text/javascript" src="../../../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../../../lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../../js/xadmin.js"></script>
+    <script type="text/javascript" src="../../../js/api.js"></script>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="../../../js/html5/html5.min.js"></script>
+    <script src="../../../js/html5/respond.min.js"></script>
+    <![endif]-->
+    <style>
+
+    </style>
+</head>
+
+<body>
+<div class="x-body">
+    <form class="layui-form">
+        <input type="text" style="display: none" id="id" name="id">
+        <div style="overflow: hidden;display: flex">
+            <div class="layui-form-item" style="float: left;display: inline-block">
+                <label for="ip" class="layui-form-label">
+                    <span class="x-red">*</span>IP
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="ip" name="ip" required="" lay-verify="ip"
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item" style="float: right;display: inline-block">
+                <label class="layui-form-label">
+                    <span class="x-red">*</span>端口
+                </label>
+                <div class="layui-input-inline" style="width: 90px">
+                    <input type="text" id="port" name="port" required="" lay-verify="port"
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label  class="layui-form-label">
+                <span class="x-red">*</span>所属厂商
+            </label>
+            <div class="layui-input-inline">
+                <input type="text"  id="company_name" disabled  class="layui-input">
+                <input type="text" style="display: none" id="company_id" name="company_name">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label for="server" class="layui-form-label">
+                服务
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="server" name="server"  class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                说明
+            </label>
+            <div class="layui-input-inline">
+                <textarea name="info"  placeholder="请输入" class="layui-textarea" id="info"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                 扫描记录
+            </label>
+            <div class="layui-input-inline">
+                <textarea name="scanner"  placeholder="请输入" class="layui-textarea" id="scanner"></textarea>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <button  class="layui-btn add" lay-filter="add" lay-submit="" style="margin: auto;width: 100px;display: block">
+                修改
+            </button>
+        </div>
+    </form>
+</div>
+
+<script src="../../../js/comment.js"></script>
+<script>
+    var arg=JSON.parse(decodeURI(GetQueryString('el')))
+    console.log(arg)
+
+    $('#port').val(arg.port)
+    $('#company_name').val(arg.company_name)
+    $('#company_id').val(arg.company_id)
+    $('#id').val(arg.id)
+    $('#ip').val(arg.ip)
+    $('#server').val(arg.server)
+    $('#info').val(arg.info)
+    $('#scanner').val(arg.scanner)
+    layui.use(['form','layer'], function(){
+        $ = layui.jquery;
+        var form = layui.form
+            ,layer = layui.layer;
+
+        //自定义验证规则
+        form.verify({
+            port: function(value){
+                if(value==''){
+                    return '端口必填';
+                }
+            },
+            ip: function(value){
+                if(value==''||value==0){
+                    return 'ip必填';
+                }
+            }
+        });
+
+        //监听提交
+        form.on('submit(add)', function(data){
+            console.log(data);
+            var datas=data.field
+            post('edit_port',datas,function (res) {
+                layer.alert(res.msg, {icon: 6},function () {
+                    // 获得frame索引
+                    var index = parent.layer.getFrameIndex(window.name);
+                    //关闭当前frame
+                    parent.layer.close(index);
+                    //刷新
+                    parent. location.reload()
+                });
+
+            })
+            return false;
+        });
+
+
+    });
+</script>
+
+</body>
+
+</html>

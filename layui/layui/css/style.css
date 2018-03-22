@@ -1,0 +1,38 @@
+body {
+    width: 100%;
+    background: url(../images/them/a.jpg) no-repeat #54364a;
+    background-size: cover;
+    color: #ffffff;
+}
+a,.layui-breadcrumb a{color: #fff!important;}
+.layui-breadcrumb a cite, .layui-breadcrumb a span{color:orangered }
+.layui-tab-title{border-bottom: 1px solid rgba(255, 255, 255, 0.2);  }
+.layui-input, .layui-select, .layui-textarea,.layui-table{    background-color: rgba(0, 0, 0, 0.25);}
+.layui-table tbody tr:hover,.layui-table-hover{background-color: rgba(0,0,0,0.4)!important;}
+.layui-table thead tr{background-color: rgba(0,0,0,0.4);}
+.layui-table th, .layui-table td,.layui-elem-field,.layui-input, .layui-select, .layui-textarea {
+    border: 1px solid rgba(255,255,255,0.2);
+
+}
+.layui-input, .layui-select, .layui-textarea{
+    color: #fff;
+}
+input::-webkit-input-placeholder{
+    color:#fff;
+}
+input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+    color:#fff;
+}
+input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+    color:#fff;
+}
+input:-ms-input-placeholder{  /* Internet Explorer 10-11 */
+    color:#fff;
+}
+.layui-layer-content{color: #333}
+.layui-layer-btn a.layui-layer-btn1{color: #666!important;}
+
+
+.layui-laypage a, .layui-laypage span{margin:0 5px 5px 0 }
+
+.td-manage .layui-icon{margin-right: 15px}
