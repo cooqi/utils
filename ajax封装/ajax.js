@@ -93,7 +93,7 @@ function getData(url,data, success, cache, alone) {
 }
 // jsonp跨域请求(get方式提交) 
 function jsonp(url, success, cache, alone) {
-	ajax(url, {}, success, cache, alone, false, 'get','jsonp'); 
+	ajax(url, success, cache, alone, false, 'get','jsonp'); 
 }
 
 
