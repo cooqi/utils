@@ -1,10 +1,7 @@
 //页面加载所要进行的操作 
-$(function () { 
-//设置ajax当前状态(是否可以发送); 
-	ajaxStatus = true; 
-}); 
+ajaxStatus = true;
 // ajax封装 
-var baseUrl='';
+var baseUrl='http://192.168.0.176:8080/public/';
 function ajax(url, data, success, cache, alone, async, type, dataType, error) { 
 	var type = type || 'post';//请求类型 
 	var dataType = dataType || 'json';//接收数据类型 
@@ -13,8 +10,8 @@ function ajax(url, data, success, cache, alone, async, type, dataType, error) {
 	var cache = cache || false;//浏览器历史缓存 
 	var success = success || function (data) { 
 		/*console.log('请求成功');*/ 
-		setTimeout(function () { 
-			layer.msg(data.msg);//通过layer插件来进行提示信息 
+		setTimeout(function () {
+            alert(data.msg);//通过layer插件来进行提示信息
 		},500); 
 		if(data.status){
 			//服务器处理成功 
@@ -35,14 +32,14 @@ function ajax(url, data, success, cache, alone, async, type, dataType, error) {
 	 }; 
 	var error = error || function (data) {
 		  /*console.error('请求成功失败');*/ /*data.status;//错误状态吗*/ 
-		layer.closeAll('loading'); 
+	//	layer.closeAll('loading');
 		setTimeout(function () {
 		   if(data.status == 404){
-		   		 layer.msg('请求失败，请求未找到'); 
+		   		 alert('请求失败，请求未找到');
 		    }else if(data.status == 503){
-		    	 layer.msg('请求失败，服务器内部错误'); 
-		    }else { 
-		    	 layer.msg('请求失败,网络连接超时'); 
+               alert('请求失败，服务器内部错误');
+		    }else {
+               alert('请求失败,网络连接超时');
 		    } 
 		    ajaxStatus = true; 
 		},500); 
@@ -65,14 +62,7 @@ function ajax(url, data, success, cache, alone, async, type, dataType, error) {
 		'dataType': dataType,
 		'async': async, 
 		'success': success, 
-		'error': error,
-		'jsonpCallback': 'jsonp' + (new Date()).valueOf().toString().substr(-4), 
-		'beforeSend': function () {
-		layer.msg('加载中', {//通过layer插件来进行提示正在加载 
-			icon: 16,
-			shade: 0.01 
-			}); 
-		}, 
+		'error': error
 	}); 
 } 
 // submitAjax(post方式提交) 
@@ -94,12 +84,12 @@ function post(url, data, success, cache, alone) {
 	ajax(url, data, success, cache, alone, false, 'post','json'); 
 } 
 // ajax提交(get方式提交) 
-function get(url, success, cache, alone) {
-	ajax(url, {}, success, alone, false, 'get','json'); 
+function get(url,data,  success, cache, alone) {
+	ajax(url, data, success, cache,alone, false, 'get','json');
 }
 // ajax提交(get方式提交带参数) 
 function getData(url,data, success, cache, alone) {
-	ajax(url, data, success, alone, false, 'get','json'); 
+	ajax(url, data, success, alone, cache,false, 'get','json');
 }
 // jsonp跨域请求(get方式提交) 
 function jsonp(url, success, cache, alone) {
