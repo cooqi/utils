@@ -10,6 +10,7 @@
   display: none;
 }
 
+.checkbox[type=radio]+s,
 .checkbox[type=checkbox]+s{
   width: 13px;
   height: 13px;
@@ -21,6 +22,7 @@
   background-size: contain;
 }
 
+.checkbox[type=radio]:checked+s,
 .checkbox[type=checkbox]:checked+s{
   background-image: url('checked.png');
 }
@@ -35,7 +37,7 @@
 
 <style>
 
-.check_box label,.radio_box label{display:none;}
+label{display:none;}
 
 </style>
 
@@ -46,11 +48,16 @@
 <body>
 <label>
     <input name="checkbox" class="checkbox" type="checkbox"/>
-    <s></s><span>天空</span>
+    <s></s><span>天空checkbox</span>
+</label>
+<br>
+<label>
+    <input name="checkbox" class="checkbox" type="radio"/>
+    <s></s><span>大地radio</span>
 </label>
 <label>
-    <input name="checkbox" class="checkbox" type="checkbox"/>
-    <s></s><span>大地</span>
+    <input name="checkbox" class="checkbox" type="radio"/>
+    <s></s><span>大地radio</span>
 </label>
 
 
